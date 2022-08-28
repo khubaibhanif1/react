@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Login from "./components/bg"
 import Web3 from "web3";
-import {create } from "ipfs-http-client"
+
+// Infura
+import { create } from 'ipfs-http-client';
 
 
 
 // Component
 function App() {
-  console.log(process.env.REACT_APP_NOT_SECRET_CODE);
 
   const [count, setCount] = useState(0);
   const [Counter, setCounter] = useState(0);
@@ -23,15 +24,15 @@ function App() {
       const myWeb3 = await new Web3(window.ethereum)
       console.log(myWeb3);
       await window.ethereum.enable()
-      .then(async wallet => {
-        console.log(wallet);
-        setMyWallet(wallet[0])
+        .then(async wallet => {
+          console.log(wallet);
+          setMyWallet(wallet[0])
 
-        setMyBalance(await myWeb3.eth.getBalance(wallet[0]))
-        console.log(await myWeb3.eth.getAccounts());
-        console.log(await myWeb3.eth.getTransaction("0x5dba8380c441c2cb6d32ab8866fcc351dd756e0b01e9689e7c1c240f3dffa3ce"));
-        console.log(await myWeb3.eth.getTransactionReceipt("0x5dba8380c441c2cb6d32ab8866fcc351dd756e0b01e9689e7c1c240f3dffa3ce"));
-      })
+          setMyBalance(await myWeb3.eth.getBalance(wallet[0]))
+          console.log(await myWeb3.eth.getAccounts());
+          console.log(await myWeb3.eth.getTransaction("0x5dba8380c441c2cb6d32ab8866fcc351dd756e0b01e9689e7c1c240f3dffa3ce"));
+          console.log(await myWeb3.eth.getTransactionReceipt("0x5dba8380c441c2cb6d32ab8866fcc351dd756e0b01e9689e7c1c240f3dffa3ce"));
+        })
 
     } else {
       alert("Install Metamask")
@@ -51,6 +52,44 @@ function App() {
     console.log("----------------------");
   }
 
+  async function IPFS(e) {
+    var projectId = ""
+    var projectSecret = ""
+    const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+    alert("IPFS")
+    
+    const file = e.target.files[0]
+    try {
+
+      const ipfs = create({
+        host: "ipfs.infura.io",
+        port: 5001,
+        protocol: "https",
+        headers: {
+          authorization: auth,
+        }
+      })
+
+      await ipfs.add(file)
+        .then((res) => {
+          console.log("then");
+          console.log(res);
+          // response = res
+        })
+        .catch((res) => {
+          console.log("catch");
+          console.log(res);
+
+        })
+
+      // const added = await client.add("file")
+      // const url = `https://ipfs.infura.io/ipfs/${added.path}`
+      // console.log(url);
+      // updateFileUrl(url)
+    } catch (error) {
+      return console.log('Error uploading file: ', error)
+    }
+  }
 
   useEffect(() => {
     if (!auth) {
@@ -74,6 +113,10 @@ function App() {
         </div>
         <div>
           <button onClick={connectWallet}>Connect to Metamask</button>
+        </div>
+
+        <div>
+          <input type="file" onChange={(e) => IPFS(e)} />
         </div>
       </div>
 
