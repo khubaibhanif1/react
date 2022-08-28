@@ -1,0 +1,76 @@
+.bg{
+  background-image: url('./bg.jpeg');
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+.p1{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+.a1{
+  background-color: lightgoldenrodyellow;
+  display: flex;
+  padding: 10px;
+  border: 2px solid gray;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: relative;
+  top: 35%;
+  height: 100px;
+}
+.b1{
+  margin: 15px;
+}
+.b1 label{
+  margin-right: 10px;
+}
+
+.b1 button{
+  font-size: large;
+  background-color: lightblue;
+  color: black;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.card{
+  /* width: 300px; */
+  min-height: 250px; 
+  border: 1px solid gray;
+  width: 230px;
+  background-color: linen;
+  margin: 10px 10px  0px 10px;
+
+}
+
+.cardImg {
+  display: flex;
+  justify-content: center;
+
+}
+
+.cardImg img {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+}
+
+.albumId{
+  color: black;
+  font-weight: 600;
+  padding: 10px 20px;
+}
+
+.id{
+  color: black;
+  font-weight: 600;
+  padding: 10px 20px;
+}
+
+.title{
+  color: black;
+  font-weight: 600;
+  padding: 10px 20px;
+}
